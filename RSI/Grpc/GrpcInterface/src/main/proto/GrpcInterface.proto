@@ -1,0 +1,45 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_package = "org.example";
+option java_outer_classname = "GrpcAppProto";
+option objc_class_prefix = "GAP";
+// The service definition.
+service ServiceName {
+  // Remote procedures:
+  rpc getData (Empty) returns (stream Data) {}
+  rpc getRecord (Id) returns (Data) {}
+  rpc setRecord (Data) returns (Text) {}
+  rpc countData (Data) returns (Text) {}
+  rpc uploadImage (stream Image) returns (Text) {}
+  rpc downloadImage (Text) returns (stream Image) {}
+//  rpc unaryProcedure (TheRequest) returns (TheResponse) {}
+//  rpc streamProcedure (TheRequest) returns (stream TheResponse) {}
+//  rpc streamBytesProcedure (TheRequest) returns (stream ByteResponse) {}
+//  rpc streamToSrv (stream TheRequest) returns (TheResponse) {}
+//  rpc streamToSrvBytes (stream ByteRequest) returns (TheResponse) {}
+}
+
+message Empty {
+
+}
+
+message Id {
+  int32 id = 1;
+}
+
+// The request message containing the user's name and age.
+message Data {
+  int32 id = 1;
+  string name = 2;
+  int32 age = 3;
+  string imagePath = 4;
+}
+// The response message containing the hello text
+message Text {
+  string message = 1;
+}
+
+message Image {
+  int32 num_of_bytes = 1;
+  bytes chunks = 2;
+}
